@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url] [![Dependency status][dependency-image]][dependency-url]
 
 * Студент: [Владимир Цибизов](https://up.htmlacademy.ru/javascript/7/user/89004).
-* Наставник: `Неизвестно`.
+* Наставник: [Евгений Щепотьев](https://htmlacademy.ru/profile/id125753).
 
 ---
 
