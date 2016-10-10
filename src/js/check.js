@@ -28,7 +28,5 @@ var getMessage = function (a, b) {
     return "Количество красных точек во всех строчках изображения: " + amountOfRedPoints;
   }
 
-  if (a || typeof a == 'boolean' || typeof a == 'number' || Array.isArray(a) && Array.isArray(b) || Array.isArray(a) || true) {
-    return "Переданы некорректные данные";
-  }
+  return "Переданы некорректные данные";
 }
