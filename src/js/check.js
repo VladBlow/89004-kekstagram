@@ -30,3 +30,5 @@ var getMessage = function(a, b) {
 
   return 'Переданы некорректные данные';
 };
+
+getMessage();
