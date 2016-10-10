@@ -131,10 +131,14 @@
       this._ctx.fill('evenodd');
 
       // Текст
+      var textImageSize = this._image.naturalWidth + ' x ' + this._image.naturalHeight;
+      var positionTextX = 0;
+      var positionTextY = -(this._container.height / 2) + 25;
+
       this._ctx.font = '20px sans-serif';
       this._ctx.fillStyle = '#fff';
-      this._ctx.fillText(this._image.naturalWidth + ' x ' + this._image.naturalHeight, -this._container.width / 8.2, -this._container.width / 3.3);
-      console.log(this._container.width);
+      this._ctx.textAlign = 'center';
+      this._ctx.fillText(textImageSize, positionTextX, positionTextY);
 
       // Отрисовка прямоугольника, обозначающего область изображения после
       // кадрирования. Координаты задаются от центра.
