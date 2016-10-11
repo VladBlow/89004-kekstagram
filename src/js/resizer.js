@@ -146,7 +146,10 @@
       var startDrawCicrleX = (-this._resizeConstraint.side / 2) - this._ctx.lineWidth / 2;
       var startDrawCicrleY = (-this._resizeConstraint.side / 2) - this._ctx.lineWidth / 2;
 
-      this.drawCircle(startDrawCicrleX, startDrawCicrleY);
+      for(var i = 0; i < -startDrawCicrleX; i++) {
+        this.drawCircle(startDrawCicrleX, startDrawCicrleY);
+      }
+
 
 
 
