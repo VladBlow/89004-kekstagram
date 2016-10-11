@@ -83,23 +83,6 @@
       // Очистка изображения.
       this._ctx.clearRect(0, 0, this._container.width, this._container.height);
 
-      // Параметры линии.
-      // NB! Такие параметры сохраняются на время всего процесса отрисовки
-      // canvas'a поэтому важно вовремя поменять их, если нужно начать отрисовку
-      // чего-либо с другой обводкой.
-
-      // // Толщина линии.
-      // this._ctx.lineWidth = 6;
-      // // Цвет обводки.
-      // this._ctx.strokeStyle = '#ffe753';
-      // // Размер штрихов. Первый элемент массива задает длину штриха, второй
-      // // расстояние между соседними штрихами.
-      // this._ctx.setLineDash([15, 10]);
-      // // Смещение первого штриха от начала линии.
-      // this._ctx.lineDashOffset = 7;
-
-
-
       // Сохранение состояния канваса.
       this._ctx.save();
 
@@ -146,12 +129,25 @@
       var startDrawCicrleX = (-this._resizeConstraint.side / 2) - this._ctx.lineWidth / 2;
       var startDrawCicrleY = (-this._resizeConstraint.side / 2) - this._ctx.lineWidth / 2;
 
-      for(var i = 0; i < -startDrawCicrleX; i++) {
-        this.drawCircle(startDrawCicrleX, startDrawCicrleY);
+      for(var i = 0; i < -startDrawCicrleX * 2; i += 20) {
+        console.log(-startDrawCicrleX);
+        this.drawCircle(startDrawCicrleX + i, startDrawCicrleY);
       }
 
+      for(i = 0; i < -startDrawCicrleY * 2; i += 20) {
+        console.log(-startDrawCicrleX);
+        this.drawCircle(startDrawCicrleX, startDrawCicrleY + i);
+      }
 
+      for(i = 0; i < -startDrawCicrleX * 2; i += 20) {
+        console.log(-startDrawCicrleX);
+        this.drawCircle(startDrawCicrleX + i, -startDrawCicrleY);
+      }
 
+      for(i = 0; i < -startDrawCicrleY * 2; i += 20) {
+        console.log(-startDrawCicrleX);
+        this.drawCircle(-startDrawCicrleX, startDrawCicrleY + i);
+      }
 
       // Отрисовка прямоугольника, обозначающего область изображения после
       // кадрирования. Координаты задаются от центра.
