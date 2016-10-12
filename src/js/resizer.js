@@ -125,29 +125,8 @@
       this._ctx.textAlign = 'center';
       this._ctx.fillText(textImageSize, positionTextX, positionTextY);
 
-      // Отрисовка обводки точками
-      var startDrawCicrleX = (-this._resizeConstraint.side / 2) - this._ctx.lineWidth / 2;
-      var startDrawCicrleY = (-this._resizeConstraint.side / 2) - this._ctx.lineWidth / 2;
-
-      for(var i = 0; i < -startDrawCicrleX * 2; i += 20) {
-        console.log(-startDrawCicrleX);
-        this.drawCircle(startDrawCicrleX + i, startDrawCicrleY);
-      }
-
-      for(i = 0; i < -startDrawCicrleY * 2; i += 20) {
-        console.log(-startDrawCicrleX);
-        this.drawCircle(startDrawCicrleX, startDrawCicrleY + i);
-      }
-
-      for(i = 0; i < -startDrawCicrleX * 2; i += 20) {
-        console.log(-startDrawCicrleX);
-        this.drawCircle(startDrawCicrleX + i, -startDrawCicrleY);
-      }
-
-      for(i = 0; i < -startDrawCicrleY * 2; i += 20) {
-        console.log(-startDrawCicrleX);
-        this.drawCircle(-startDrawCicrleX, startDrawCicrleY + i);
-      }
+      // Отрисовка зигзагами
+      this.drawAngle();
 
       // Отрисовка прямоугольника, обозначающего область изображения после
       // кадрирования. Координаты задаются от центра.
@@ -166,13 +145,42 @@
       this._ctx.restore();
     },
 
-    drawCircle: function(circleX, circleY) {
-      var circleSize = 5;
+    drawAngle: function() {
+      var side = (-this._resizeConstraint.side / 2) - this._ctx.lineWidth / 2;
+      var startX = (-this._resizeConstraint.side / 2) - this._ctx.lineWidth / 2;
+      var startY = (-this._resizeConstraint.side / 2) - this._ctx.lineWidth / 2;
+      var sizeSideAngle = 10;
+
+      this._ctx.strokeStyle = '#ffe753';
+      this._ctx.lineWidth = 3;
+
       this._ctx.beginPath();
-      this._ctx.arc(circleX, circleY, circleSize, 0, Math.PI * 2, true);
-      this._ctx.closePath();
-      this._ctx.fillStyle = '#ffe753';
-      this._ctx.fill();
+      this._ctx.moveTo(startX, startY);
+
+      for(var i = 0; i < -side - 10; i += 10) {
+        this._ctx.lineTo(startX += sizeSideAngle, startY -= sizeSideAngle);
+        this._ctx.lineTo(startX += sizeSideAngle, startY += sizeSideAngle);
+      }
+
+      for(i = 0; i < -side - 10; i += 10) {
+        this._ctx.lineTo(startX += sizeSideAngle, startY += sizeSideAngle);
+        this._ctx.lineTo(startX -= sizeSideAngle, startY += sizeSideAngle);
+      }
+
+      for(i = 0; i < -side - 10; i += 10) {
+        this._ctx.lineTo(startX -= sizeSideAngle, startY += sizeSideAngle);
+        this._ctx.lineTo(startX -= sizeSideAngle, startY -= sizeSideAngle);
+      }
+
+      for(i = 0; i < -side - 10; i += 10) {
+        this._ctx.lineTo(startX -= sizeSideAngle, startY -= sizeSideAngle);
+        this._ctx.lineTo(startX += sizeSideAngle, startY -= sizeSideAngle);
+      }
+
+      this._ctx.stroke();
+
+      // Обнуление цвета, иначе появлется рамка
+      this._ctx.strokeStyle = 'rgba(0,0,0,0)';
     },
 
     /**
