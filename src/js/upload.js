@@ -71,8 +71,37 @@
    * Проверяет, валидны ли данные, в форме кадрирования.
    * @return {boolean}
    */
+
+
+  var resizeX = document.querySelector('#resize-x');
+  var resizeY = document.querySelector('#resize-y');
+  var resizeSize = document.querySelector('#resize-size');
+  var resizeFwd = document.querySelector('#resize-fwd');
+
+
+
   var resizeFormIsValid = function() {
-    return true;
+
+    resizeFwd.setAttribute('disabled', true);
+
+    if((Number(resizeX.value) > 0 && Number(resizeY.value) > 0) && (Number(resizeX.value) + Number(resizeSize.value) <= currentResizer._image.naturalWidth) && (Number(resizeY.value) + Number(resizeSize.value) <= currentResizer._image.naturalHeight)) {
+      resizeFwd.removeAttribute('disabled');
+      return true;
+    }
+
+    return false;
+  };
+
+  resizeX.oninput = function() {
+    resizeFormIsValid();
+  };
+
+  resizeY.oninput = function() {
+    resizeFormIsValid();
+  };
+
+  resizeSize.oninput = function() {
+    resizeFormIsValid();
   };
 
   /**
