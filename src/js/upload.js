@@ -87,7 +87,7 @@
 
     resizeFwd.setAttribute('disabled', true);
 
-    if((x > 0 && y > 0) && (x + size <= imageWidth) && (y + size <= imageHeight)) {
+    if((x >= 0 && y >= 0) && (x + size <= imageWidth) && (y + size <= imageHeight)) {
       resizeFwd.removeAttribute('disabled');
       return true;
     }
