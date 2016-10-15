@@ -78,13 +78,16 @@
   var resizeSize = document.querySelector('#resize-size');
   var resizeFwd = document.querySelector('#resize-fwd');
 
-
-
   var resizeFormIsValid = function() {
+    var x = Number(resizeX.value);
+    var y = Number(resizeY.value);
+    var size = Number(resizeSize.value);
+    var imageWidth = currentResizer._image.naturalWidth;
+    var imageHeight = currentResizer._image.naturalHeight;
 
     resizeFwd.setAttribute('disabled', true);
 
-    if((Number(resizeX.value) > 0 && Number(resizeY.value) > 0) && (Number(resizeX.value) + Number(resizeSize.value) <= currentResizer._image.naturalWidth) && (Number(resizeY.value) + Number(resizeSize.value) <= currentResizer._image.naturalHeight)) {
+    if((x > 0 && y > 0) && (x + size <= imageWidth) && (y + size <= imageHeight)) {
       resizeFwd.removeAttribute('disabled');
       return true;
     }
