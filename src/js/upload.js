@@ -72,7 +72,6 @@
    * @return {boolean}
    */
 
-
   var resizeX = document.querySelector('#resize-x');
   var resizeY = document.querySelector('#resize-y');
   var resizeSize = document.querySelector('#resize-size');
@@ -107,6 +106,8 @@
     resizeFormIsValid();
   };
 
+
+
   /**
    * Форма загрузки изображения.
    * @type {HTMLFormElement}
@@ -124,6 +125,26 @@
    * @type {HTMLFormElement}
    */
   var filterForm = document.forms['upload-filter'];
+
+  filterForm.onsubmit = function(evt) {
+    evt.preventDefault();
+
+    var now = new Date();
+    var lastBirthday = new Date(now.setMonth(0, 1));
+    var diff = Date.now() - lastBirthday.getTime();
+
+    if (diff < 0) {
+      lastBirthday.setFullYear(now.getFullYear() - 1);
+      diff = Date.now() - lastBirthday.getTime();
+    }
+
+    var dateToExpire = Date.now() + diff;
+    var formattedDateToExpire = new Date(dateToExpire).toUTCString();
+
+    document.cookie = 'upload-filter=1; expires=' + formattedDateToExpire;
+
+    filterForm.submit();
+  };
 
   /**
    * @type {HTMLImageElement}
