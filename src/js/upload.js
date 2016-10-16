@@ -8,6 +8,8 @@
 'use strict';
 
 (function() {
+  var cookies = require('../lib/js.cookie.js');
+
   /** @enum {string} */
   var FileType = {
     'GIF': '',
@@ -107,7 +109,6 @@
   };
 
 
-
   /**
    * Форма загрузки изображения.
    * @type {HTMLFormElement}
@@ -126,25 +127,36 @@
    */
   var filterForm = document.forms['upload-filter'];
 
-  filterForm.onsubmit = function(evt) {
-    evt.preventDefault();
+  var filterInputs = document.querySelector('.upload-filter-controls');
 
-    var now = new Date();
-    var lastBirthday = new Date(now.setMonth(0, 1));
-    var diff = Date.now() - lastBirthday.getTime();
+  filterForm.addEventListener('submit', function() {
 
-    if (diff < 0) {
-      lastBirthday.setFullYear(now.getFullYear() - 1);
-      diff = Date.now() - lastBirthday.getTime();
-    }
+    filterInputs.childNodes.forEach(function(item) {
+      if(item.checked === true) {
+        var now = new Date();
+        var lastBirthday = new Date(now.setMonth(11, 9));
 
-    var dateToExpire = Date.now() + diff;
-    var formattedDateToExpire = new Date(dateToExpire).toUTCString();
+        if (Date.now() < lastBirthday) {
+          lastBirthday.setFullYear(now.getFullYear() - 1);
+        }
 
-    document.cookie = 'upload-filter=1; expires=' + formattedDateToExpire;
+        var diff = Date.now() - lastBirthday.getTime();
+        var dateToExpire = Date.now() + diff;
+        var formattedDateToExpire = new Date(dateToExpire);
+
+        cookies.set('upload-filter', item.defaultValue, {expires: formattedDateToExpire});
+      }
+    });
 
     filterForm.submit();
-  };
+
+  });
+
+  filterInputs.childNodes.forEach(function(item) {
+    if(item.defaultValue === cookies.get('upload-filter')) {
+      item.checked = true;
+    }
+  });
 
   /**
    * @type {HTMLImageElement}
