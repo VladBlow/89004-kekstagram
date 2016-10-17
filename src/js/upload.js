@@ -151,12 +151,6 @@
 
   });
 
-  if(document.cookie !== '') {
-    var defaultFilter = window.Cookies.get('upload-filter');
-    var defaultInput = document.querySelector('#upload-filter-' + defaultFilter);
-    defaultInput.checked = true;
-  }
-
   /**
    * @type {HTMLImageElement}
    */
@@ -166,6 +160,14 @@
    * @type {HTMLElement}
    */
   var uploadMessage = document.querySelector('.upload-message');
+
+  if(document.cookie !== '') {
+    var defaultFilter = window.Cookies.get('upload-filter');
+    var defaultInput = document.querySelector('#upload-filter-' + defaultFilter);
+
+    filterImage.className = 'filter-image-preview ' + 'filter-' + defaultFilter;
+    defaultInput.click();
+  }
 
   /**
    * @param {Action} action
