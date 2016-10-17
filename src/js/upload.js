@@ -107,7 +107,6 @@
     resizeFormIsValid();
   };
 
-
   /**
    * Форма загрузки изображения.
    * @type {HTMLFormElement}
@@ -131,7 +130,7 @@
   filterForm.addEventListener('submit', function() {
 
     filterInputs.childNodes.forEach(function(item) {
-      if(item.checked === true) {
+      if(item.checked) {
         var now = new Date();
         var lastBirthday = new Date(now.setMonth(11, 9));
 
