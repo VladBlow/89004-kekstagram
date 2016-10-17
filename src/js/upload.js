@@ -8,7 +8,6 @@
 'use strict';
 
 (function() {
-  var cookies = require('../lib/js.cookie.js');
 
   /** @enum {string} */
   var FileType = {
@@ -144,7 +143,7 @@
         var dateToExpire = Date.now() + diff;
         var formattedDateToExpire = new Date(dateToExpire);
 
-        cookies.set('upload-filter', item.defaultValue, {expires: formattedDateToExpire});
+        window.Cookies.set('upload-filter', item.defaultValue, {expires: formattedDateToExpire});
       }
     });
 
@@ -153,7 +152,7 @@
   });
 
   filterInputs.childNodes.forEach(function(item) {
-    if(item.defaultValue === cookies.get('upload-filter')) {
+    if(item.defaultValue === window.Cookies.get('upload-filter')) {
       item.checked = true;
     }
   });
