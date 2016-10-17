@@ -143,7 +143,7 @@
         var dateToExpire = Date.now() + diff;
         var formattedDateToExpire = new Date(dateToExpire);
 
-        window.Cookies.set('upload-filter', item.defaultValue, {expires: formattedDateToExpire});
+        window.Cookies.set('upload-filter', item.value, {expires: formattedDateToExpire});
       }
     });
 
@@ -151,11 +151,11 @@
 
   });
 
-  filterInputs.childNodes.forEach(function(item) {
-    if(item.defaultValue === window.Cookies.get('upload-filter')) {
-      item.checked = true;
-    }
-  });
+  if(document.cookie !== '') {
+    var defaultFilter = window.Cookies.get('upload-filter');
+    var defaultInput = document.querySelector('#upload-filter-' + defaultFilter);
+    defaultInput.checked = true;
+  }
 
   /**
    * @type {HTMLImageElement}
