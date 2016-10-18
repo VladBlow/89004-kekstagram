@@ -8,6 +8,7 @@
 'use strict';
 
 (function() {
+
   /** @enum {string} */
   var FileType = {
     'GIF': '',
@@ -72,7 +73,6 @@
    * @return {boolean}
    */
 
-
   var resizeX = document.querySelector('#resize-x');
   var resizeY = document.querySelector('#resize-y');
   var resizeSize = document.querySelector('#resize-size');
@@ -124,6 +124,31 @@
    * @type {HTMLFormElement}
    */
   var filterForm = document.forms['upload-filter'];
+
+  var filterInputs = document.querySelector('.upload-filter-controls');
+
+  filterForm.addEventListener('submit', function() {
+
+    filterInputs.childNodes.forEach(function(item) {
+      if(item.checked) {
+        var now = new Date();
+        var lastBirthday = new Date(now.setMonth(11, 9));
+
+        if (Date.now() < lastBirthday) {
+          lastBirthday.setFullYear(now.getFullYear() - 1);
+        }
+
+        var diff = Date.now() - lastBirthday.getTime();
+        var dateToExpire = Date.now() + diff;
+        var formattedDateToExpire = new Date(dateToExpire);
+
+        window.Cookies.set('upload-filter', item.value, {expires: formattedDateToExpire});
+      }
+    });
+
+    filterForm.submit();
+
+  });
 
   /**
    * @type {HTMLImageElement}
@@ -292,6 +317,13 @@
     // состояние или просто перезаписывать.
     filterImage.className = 'filter-image-preview ' + filterMap[selectedFilter];
   };
+
+  if(document.cookie !== '') {
+    var defaultFilter = window.Cookies.get('upload-filter');
+    var defaultInput = document.querySelector('#upload-filter-' + defaultFilter);
+
+    defaultInput.click();
+  }
 
   cleanupResizer();
   updateBackground();
