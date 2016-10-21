@@ -117,6 +117,8 @@ var getPictureElement = function(picture) {
   pictureElement.querySelector('.picture-comments').textContent = picture.comments;
   pictureElement.querySelector('.picture-likes').textContent = picture.likes;
 
+  var img = pictureElement.querySelector('img');
+
   var image = new Image();
   var imageTimeout = null;
 
@@ -129,10 +131,11 @@ var getPictureElement = function(picture) {
 
   image.onerror = function() {
     console.log('download failed');
+    img.src = '';
     pictureElement.classList.add('picture-load-failure');
   };
 
-  image.src = picture.url;
+  img.src = picture.url;
 
   imageTimeout = setTimeout(function() {
     image.classList.add('picture-load-failure');
