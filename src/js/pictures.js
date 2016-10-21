@@ -1,6 +1,6 @@
 'use strict';
 
-var DATA = [{
+var data = [{
   'likes': 40,
   'comments': 12,
   'url': 'photos/1.jpg'
@@ -112,10 +112,10 @@ var container = document.querySelector('.pictures');
 var templateContainer = 'content' in template ? template.content : template;
 var IMAGE_LOAD_TIMEOUT = 10000;
 
-var getPictureElement = function(data) {
+var getPictureElement = function(picture) {
   var pictureElement = templateContainer.querySelector('.picture').cloneNode(true);
-  pictureElement.querySelector('.picture-comments').textContent = data.comments;
-  pictureElement.querySelector('.picture-likes').textContent = data.likes;
+  pictureElement.querySelector('.picture-comments').textContent = picture.comments;
+  pictureElement.querySelector('.picture-likes').textContent = picture.likes;
 
   var image = new Image();
 
@@ -131,7 +131,7 @@ var getPictureElement = function(data) {
     pictureElement.classList.add('picture-load-failure');
   };
 
-  image.src = data.url;
+  image.src = picture.url;
 
   var imageTimeout = setTimeout(function() {
     image.classList.add('picture-load-failure');
@@ -140,12 +140,12 @@ var getPictureElement = function(data) {
   return pictureElement;
 };
 
-var renderPicture = function(data) {
+var renderPicture = function(pictures) {
   var filters = document.querySelector('.filters');
   filters.classList.add('hidden');
-  data.forEach(function(picture) {
+  pictures.forEach(function(picture) {
     container.appendChild(getPictureElement(picture));
   });
 };
 
-renderPicture(DATA);
+renderPicture(data);
