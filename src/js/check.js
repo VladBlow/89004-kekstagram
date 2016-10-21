@@ -22,9 +22,7 @@ var getMessage = function(a, b) {
     return 'Общая площадь артефактов сжатия: ' + artifactsSquare + ' пикселей';
   } else if (Array.isArray(a)) {
     var amountOfRedPoints = 0;
-    // for (i = 0; i < a.length; i++) {
-    //   amountOfRedPoints = amountOfRedPoints + a[i];
-    // }
+
     a.forEach(function(item) {
       amountOfRedPoints = amountOfRedPoints + item;
     });
