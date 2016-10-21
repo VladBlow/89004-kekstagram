@@ -118,6 +118,7 @@ var getPictureElement = function(picture) {
   pictureElement.querySelector('.picture-likes').textContent = picture.likes;
 
   var image = new Image();
+  var imageTimeout = null;
 
   image.onload = function(evt) {
     clearTimeout(imageTimeout);
@@ -133,7 +134,7 @@ var getPictureElement = function(picture) {
 
   image.src = picture.url;
 
-  var imageTimeout = setTimeout(function() {
+  imageTimeout = setTimeout(function() {
     image.classList.add('picture-load-failure');
   }, IMAGE_LOAD_TIMEOUT);
 
