@@ -124,18 +124,16 @@ var getPictureElement = function(picture) {
 
   image.onload = function(evt) {
     clearTimeout(imageTimeout);
-    image.src = evt.target.src;
+    img.src = evt.target.src;
     image.width = 182;
     image.height = 182;
   };
 
   image.onerror = function() {
-    console.log('download failed');
-    img.src = '';
     pictureElement.classList.add('picture-load-failure');
   };
 
-  img.src = picture.url;
+  image.src = picture.url;
 
   imageTimeout = setTimeout(function() {
     image.classList.add('picture-load-failure');
