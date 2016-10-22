@@ -130,6 +130,7 @@ var getPictureElement = function(picture) {
   };
 
   image.onerror = function() {
+    clearTimeout(imageTimeout);
     pictureElement.classList.add('picture-load-failure');
   };
 
@@ -142,12 +143,13 @@ var getPictureElement = function(picture) {
   return pictureElement;
 };
 
-var renderPicture = function(pictures) {
+var renderPictures = function(pictures) {
   var filters = document.querySelector('.filters');
   filters.classList.add('hidden');
   pictures.forEach(function(picture) {
     container.appendChild(getPictureElement(picture));
   });
+  filters.classList.remove('hidden');
 };
 
-renderPicture(data);
+renderPictures(data);
