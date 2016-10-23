@@ -5,6 +5,7 @@ var container = document.querySelector('.pictures');
 var templateContainer = 'content' in template ? template.content : template;
 var IMAGE_LOAD_TIMEOUT = 10000;
 var FOTO_LOAD_URL = 'http://localhost:1507/api/pictures';
+var callbackName = '__jsonpCallback';
 
 var getPictureElement = function(picture) {
   var pictureElement = templateContainer.querySelector('.picture').cloneNode(true);
@@ -46,7 +47,7 @@ var renderPictures = function(pictures) {
   filters.classList.remove('hidden');
 };
 
-var load = function(url, callback, callbackName) {
+var load = function(url, callback) {
   if (!callbackName) {
     callbackName = 'cb' + Date.now();
   }
@@ -60,6 +61,4 @@ var load = function(url, callback, callbackName) {
   document.body.appendChild(script);
 };
 
-load(FOTO_LOAD_URL, function(data) {
-  renderPictures(data);
-}, '__jsonpCallback');
+load(FOTO_LOAD_URL, renderPictures);
