@@ -5,7 +5,7 @@ var container = document.querySelector('.pictures');
 var templateContainer = 'content' in template ? template.content : template;
 var IMAGE_LOAD_TIMEOUT = 10000;
 var FOTO_LOAD_URL = 'http://localhost:1507/api/pictures';
-var callbackName = '__jsonpCallback';
+var callbackName = '__jsonpCallback' + Date.now();
 
 var getPictureElement = function(picture) {
   var pictureElement = templateContainer.querySelector('.picture').cloneNode(true);
@@ -48,9 +48,6 @@ var renderPictures = function(pictures) {
 };
 
 var load = function(url, callback) {
-  if (!callbackName) {
-    callbackName = 'cb' + Date.now();
-  }
 
   window[callbackName] = function(data) {
     callback(data);
