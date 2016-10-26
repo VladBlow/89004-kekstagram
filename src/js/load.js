@@ -9,9 +9,8 @@ var load = function(url, callback) {
   };
 
   var script = document.createElement('script');
-  // debugger;
   script.src = url + '?callback=' + callbackName;
   document.body.appendChild(script);
 };
 
-module.exports = load();
+module.exports = load;

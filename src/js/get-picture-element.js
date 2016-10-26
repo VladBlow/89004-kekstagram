@@ -35,4 +35,4 @@ var getPictureElement = function(picture) {
   return pictureElement;
 };
 
-module.exports = getPictureElement();
+module.exports = getPictureElement;
