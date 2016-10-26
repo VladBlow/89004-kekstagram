@@ -325,6 +325,8 @@
     defaultInput.click();
   }
 
-  cleanupResizer();
-  updateBackground();
+  module.exports = {
+    cleanupResizer: cleanupResizer,
+    updateBackground: updateBackground
+  };
 })();

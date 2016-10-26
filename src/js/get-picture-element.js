@@ -1,11 +1,8 @@
 'use strict';
 
 var template = document.querySelector('template');
-var container = document.querySelector('.pictures');
 var templateContainer = 'content' in template ? template.content : template;
 var IMAGE_LOAD_TIMEOUT = 10000;
-var FOTO_LOAD_URL = 'http://localhost:1507/api/pictures';
-var callbackName = '__jsonpCallback' + Date.now();
 
 var getPictureElement = function(picture) {
   var pictureElement = templateContainer.querySelector('.picture').cloneNode(true);
@@ -38,24 +35,4 @@ var getPictureElement = function(picture) {
   return pictureElement;
 };
 
-var renderPictures = function(pictures) {
-  var filters = document.querySelector('.filters');
-  filters.classList.add('hidden');
-  pictures.forEach(function(picture) {
-    container.appendChild(getPictureElement(picture));
-  });
-  filters.classList.remove('hidden');
-};
-
-var load = function(url, callback) {
-
-  window[callbackName] = function(data) {
-    callback(data);
-  };
-
-  var script = document.createElement('script');
-  script.src = url + '?callback=' + callbackName;
-  document.body.appendChild(script);
-};
-
-load(FOTO_LOAD_URL, renderPictures);
+module.exports = getPictureElement;
