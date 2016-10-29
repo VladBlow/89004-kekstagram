@@ -42,8 +42,8 @@ Gallery.prototype.setActivePicture = function(index) {
   activePicture = index;
 
   galleryImg.src = this.pictures[activePicture].url;
-  galleryLike.textContent = this.pictures[activePicture].comments;
-  galleryComment.textContent = this.pictures[activePicture].likes;
+  galleryLike.textContent = this.pictures[activePicture].likes;
+  galleryComment.textContent = this.pictures[activePicture].comments;
 };
 
 module.exports = new Gallery();
