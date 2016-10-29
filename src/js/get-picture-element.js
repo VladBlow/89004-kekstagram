@@ -5,6 +5,7 @@ var templateContainer = 'content' in template ? template.content : template;
 var IMAGE_LOAD_TIMEOUT = 10000;
 
 var getPictureElement = function(picture) {
+
   var pictureElement = templateContainer.querySelector('.picture').cloneNode(true);
   pictureElement.querySelector('.picture-comments').textContent = picture.comments;
   pictureElement.querySelector('.picture-likes').textContent = picture.likes;
