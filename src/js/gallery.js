@@ -3,12 +3,12 @@
 var gallery = document.querySelector('.gallery-overlay');
 var galleryClose = gallery.querySelector('.gallery-overlay-close');
 var galleryImg = gallery.querySelector('.gallery-overlay-image');
+var galleryLike = gallery.querySelector('.likes-count');
+var galleryComment = gallery.querySelector('.comments-count');
 
 var activePicture = 0;
 
-var Gallery = function(pictures) {
-
-};
+var Gallery = function() {};
 
 Gallery.prototype.setPictures = function(pictures) {
   this.pictures = pictures;
@@ -22,6 +22,15 @@ Gallery.prototype.show = function(index) {
   };
   gallery.classList.remove('invisible');
 
+  galleryImg.onclick = function() {
+    if(self.pictures.length <= (index + 1)) {
+      index = 0;
+      self.setActivePicture(index);
+    } else {
+      self.setActivePicture(index++);
+    }
+  };
+
   this.setActivePicture(index);
 };
 
@@ -32,7 +41,9 @@ Gallery.prototype.hide = function() {
 Gallery.prototype.setActivePicture = function(index) {
   activePicture = index;
 
-  // galleryImg.src = this.pictures[activePicture].url;
+  galleryImg.src = this.pictures[activePicture].url;
+  galleryLike.textContent = this.pictures[activePicture].comments;
+  galleryComment.textContent = this.pictures[activePicture].likes;
 };
 
 module.exports = new Gallery();

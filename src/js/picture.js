@@ -3,12 +3,12 @@
 var getPictureElement = require('./get-picture-element.js');
 var gallery = require('./gallery.js');
 
-var Picture = function(data) {
+var Picture = function(data, i) {
   this.data = data;
   this.element = getPictureElement(data);
 
   this.element.onclick = function(evt) {
-    gallery.show();
+    gallery.show(i);
     evt.preventDefault();
   };
 
@@ -17,4 +17,4 @@ var Picture = function(data) {
   };
 };
 
-module.exports = new Picture();
+module.exports = Picture;
