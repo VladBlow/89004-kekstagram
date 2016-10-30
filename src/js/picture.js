@@ -18,3 +18,5 @@ var Picture = function(data, i) {
 };
 
 module.exports = Picture;
+
+/* Сделал в предыдущем задании */
