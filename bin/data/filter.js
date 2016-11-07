@@ -5,12 +5,12 @@ module.exports = function(list, filterID) {
     case 'filter-popular':
       return list;
     case 'filter-new':
-      return sortList.sort(function(a, b) {
+      return list.sort(function(a, b) {
         return b.created - a.created;
       });
       break;
     case 'filter-discussed':
-      return sortList.sort(function(a, b) {
+      return list.sort(function(a, b) {
         return b.comments - a.comments;
       });
   }
