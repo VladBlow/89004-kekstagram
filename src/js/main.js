@@ -16,7 +16,7 @@ var pictures = [];
 upload.cleanupResizer();
 upload.updateBackground();
 
-var loadPicrures = function(filterPage) {
+var loadPictures = function(filterPage) {
   load(FOTO_LOAD_URL, {
     from: currentPage * PAGE_SIZE,
     to: currentPage * PAGE_SIZE + PAGE_SIZE,
@@ -35,17 +35,18 @@ var isBottomReached = function() {
   return footerPosition.top - window.innerHeight - GAP <= 0;
 };
 
-var isNextPageAvailable = function(data, page, pageSize) {
-  return page < Math.floor(data.length / pageSize);
+var isNextPageAvailable = function(data, page) {
+  return page < Math.floor(data.length / PAGE_SIZE);
 };
 
-loadPicrures(filter);
+loadPictures(filter);
 
 window.addEventListener('scroll', function() {
   setTimeout(function() {
-    if(isBottomReached() && isNextPageAvailable(pictures, currentPage, PAGE_SIZE)) {
+    console.log(isNextPageAvailable(pictures, currentPage));
+    if(isBottomReached() && isNextPageAvailable(pictures, currentPage)) {
       currentPage++;
-      loadPicrures();
+      loadPictures();
     }
   }, 300);
 });
@@ -53,7 +54,7 @@ window.addEventListener('scroll', function() {
 var changeFilter = function(filterID) {
   container.innerHTML = '';
   currentPage = 0;
-  loadPicrures(filterID);
+  loadPictures(filterID);
 };
 
 filters.addEventListener('click', function(evt) {
