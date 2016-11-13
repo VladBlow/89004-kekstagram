@@ -26,6 +26,10 @@ var loadPictures = function(filterPage) {
       renderPictures(data);
       pictures = data;
     }
+    if(isBottomReached() && isNextPageAvailable(pictures, currentPage)) {
+      currentPage++;
+      loadPictures();
+    }
   });
 };
 
@@ -40,10 +44,8 @@ var isNextPageAvailable = function(data, page) {
 };
 
 loadPictures(filter);
-
 window.addEventListener('scroll', function() {
   setTimeout(function() {
-    console.log(isNextPageAvailable(pictures, currentPage));
     if(isBottomReached() && isNextPageAvailable(pictures, currentPage)) {
       currentPage++;
       loadPictures();

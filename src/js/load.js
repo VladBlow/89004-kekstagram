@@ -1,7 +1,5 @@
 'use strict';
 
-// var pageNumber = 0;
-
 var getSearchString = function(params) {
   return Object.keys(params).map(function(param) {
     return [param, params[param]].join('=');
