@@ -1,11 +1,11 @@
-/* global Resizer: true */
-
 /**
  * @fileoverview
  * @author Igor Alexeenko (o0)
  */
 
 'use strict';
+
+var Resizer = require('./resizer.js');
 
 /** @enum {string} */
 var FileType = {
@@ -94,16 +94,16 @@ var resizeFormIsValid = function() {
 };
 
 var onFormFieldInput = function() {
-  resizeX = resizeX.value;
-  resizeY = resizeY.value;
-  resizeSize = resizeSize.value;
+  var resizeXvalue = resizeX.value;
+  var resizeYvalue = resizeY.value;
+  var resizeSizevalue = resizeSize.value;
 
-  currentResizer.setConstraint(resizeX, resizeY, resizeSize);
+  currentResizer.setConstraint(resizeXvalue, resizeYvalue, resizeSizevalue);
 };
 
-resizeX.addEventListener('input', onFormFieldInput());
-resizeY.addEventListener('input', onFormFieldInput());
-resizeSize.addEventListener('input', onFormFieldInput());
+resizeX.addEventListener('input', onFormFieldInput);
+resizeY.addEventListener('input', onFormFieldInput);
+resizeSize.addEventListener('input', onFormFieldInput);
 
 /**
  * Форма загрузки изображения.
@@ -334,7 +334,7 @@ var syncResizerAndForm = function() {
   resizeSize.value = constraint.side;
 };
 
-window.addEventListener('resizerchange', syncResizerAndForm());
+window.addEventListener('resizerchange', syncResizerAndForm);
 
 module.exports = {
   cleanupResizer: cleanupResizer,
