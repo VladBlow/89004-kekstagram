@@ -94,16 +94,26 @@ var resizeFormIsValid = function() {
 };
 
 var onFormFieldInput = function() {
-  var resizeXvalue = resizeX.value;
-  var resizeYvalue = resizeY.value;
-  var resizeSizevalue = resizeSize.value;
+  var resizeXvalue = +resizeX.value;
+  var resizeYvalue = +resizeY.value;
+  var resizeSizevalue = +resizeSize.value;
+  // debugger;
 
   currentResizer.setConstraint(resizeXvalue, resizeYvalue, resizeSizevalue);
 };
 
-resizeX.addEventListener('input', onFormFieldInput);
-resizeY.addEventListener('input', onFormFieldInput);
-resizeSize.addEventListener('input', onFormFieldInput);
+resizeX.addEventListener('input', function() {
+  resizeFormIsValid();
+  onFormFieldInput();
+});
+resizeY.addEventListener('input', function() {
+  resizeFormIsValid();
+  onFormFieldInput();
+});
+resizeSize.addEventListener('input', function() {
+  resizeFormIsValid();
+  onFormFieldInput();
+});
 
 /**
  * Форма загрузки изображения.
