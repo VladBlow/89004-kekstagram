@@ -23,8 +23,8 @@ var loadPictures = function(filterPage) {
     filter: filterPage
   }, function(data) {
     if(data.length > 0) {
+      pictures = pictures.concat(data);
       renderPictures(data);
-      pictures = data;
     }
     if(isBottomReached() && isNextPageAvailable(pictures, currentPage)) {
       currentPage++;
@@ -44,6 +44,7 @@ var isNextPageAvailable = function(data, page) {
 };
 
 loadPictures(filter);
+
 window.addEventListener('scroll', function() {
   setTimeout(function() {
     if(isBottomReached() && isNextPageAvailable(pictures, currentPage)) {
