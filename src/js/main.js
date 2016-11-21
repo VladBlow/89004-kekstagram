@@ -2,6 +2,7 @@
 
 var upload = require('./upload');
 var load = require('./load.js');
+var gallery = require('./gallery.js');
 var renderPictures = require('./render-pictures.js');
 
 var FOTO_LOAD_URL = 'http://localhost:1507/api/pictures';
@@ -23,8 +24,9 @@ var loadPictures = function(filterPage) {
     filter: filterPage
   }, function(data) {
     if(data.length > 0) {
+      renderPictures(data, pictures.length);
       pictures = pictures.concat(data);
-      renderPictures(data);
+      gallery.setPictures(pictures);
     }
     if(isBottomReached() && isNextPageAvailable(pictures, currentPage)) {
       currentPage++;
